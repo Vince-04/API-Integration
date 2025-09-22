@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        {% if messages %}
+            {% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+
+
+<!-- Footer -->
+<footer class="techwave-footer text-white py-5 mt-5">
+    <div class="container">
+        <div class="row text-center text-md-start">
+            <!-- Brand -->
+            <div class="col-md-4 mb-4">
+                <h3 class="fw-bold mb-3">
+                    <i class="bi bi-cpu-fill me-2"></i> TechWave
+                </h3>
+                <p class="text-light small">
+                    Your ultimate destination for cutting-edge electronics and premium gadgets.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Contact</h5>
+                <p class="small mb-1"><i class="bi bi-envelope-fill me-2"></i> support@techwave.com</p>
+                <p class="small mb-1"><i class="bi bi-phone-fill me-2"></i> +63 999 963 3595</p>
+                <div class="d-flex gap-3 mt-3">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center mt-4 pt-3 border-top border-light">
+            <p class="mb-0 small">&copy; 2025 TechWave. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Custom Footer CSS -->
+<style>
+    .techwave-footer {
+        background: linear-gradient(135deg, #0f172a, #1e293b, #2563eb);
+    }
+
+    .footer-link {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .footer-link:hover {
+        color: #38bdf8;
+        padding-left: 5px;
+    }
+
+    .social-link {
+        font-size: 1.3rem;
+        color: #e5e7eb;
+        transition: color 0.3s ease;
+    }
+
+    .social-link:hover {
+        color: #38bdf8;
+    }
+
+    .techwave-footer h5, .techwave-footer h3 {
+        color: #fff;
+    }
+
+    .border-light {
+        border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+</style>

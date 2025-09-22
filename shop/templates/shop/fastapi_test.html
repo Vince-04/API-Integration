@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FastAPI Integration Test{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">FastAPI Integration Test</h2>
+            
+            <div class="alert alert-{% if connection_status == 'Connected' %}success{% else %}danger{% endif %}">
+                <strong>Connection Status:</strong> {{ connection_status }}
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Items in FastAPI</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Total Items: {{ items|length }}</p>
+                            {% if items %}
+                                <ul class="list-group list-group-flush">
+                                    {% for item in items %}
+                                    <li class="list-group-item">
+                                        <strong>{{ item.name }}</strong> - ${{ item.price }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">No items found</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Orders in FastAPI</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Total Orders: {{ orders|length }}</p>
+                            {% if orders %}
+                                <ul class="list-group list-group-flush">
+                                    {% for order in orders %}
+                                    <li class="list-group-item">
+                                        Order #{{ order.id }} - Qty: {{ order.quantity }} - Status: {{ order.status }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">No orders found</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Sales in FastAPI</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Total Sales: {{ sales|length }}</p>
+                            {% if sales %}
+                                <ul class="list-group list-group-flush">
+                                    {% for sale in sales %}
+                                    <li class="list-group-item">
+                                        Sale #{{ sale.id }} - Total: ${{ sale.total }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">No sales found</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <a href="{% url 'shop:product_list' %}" class="btn btn-primary">Back to Shop</a>
+                <a href="{% url 'shop:test_fastapi' %}" class="btn btn-secondary">Refresh</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

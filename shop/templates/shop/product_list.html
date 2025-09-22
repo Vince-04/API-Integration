@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products - ShopLite{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">Our Products</h2>
+            
+            <!-- Search and Filter Section -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <form method="get" class="d-flex">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Search products..." value="{{ query }}">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            {% if category %}{{ category.name }}{% else %}All Categories{% endif %}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'shop:product_list' %}">All Categories</a></li>
+                            {% for cat in categories %}
+                            <li><a class="dropdown-item" href="{% url 'shop:product_list_by_category' cat.slug %}">{{ cat.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            {% if products %}
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+                    {% for product in products %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 5px;" alt="{{ product.title }}" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.title }}</h5>
+                                    <!-- Product price-->
+                                    <div class="text-muted mb-2">₱{{ product.price }}</div>
+                                    <!-- Inventory status -->
+                                    {% if product.inventory > 0 %}
+                                        <small class="text-success">✓ In Stock ({{ product.inventory }} available)</small>
+                                    {% else %}
+                                        <small class="text-danger">✗ Out of Stock</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'shop:product' product.id %}">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <h4>No products found</h4>
+                    <p class="text-muted">Try adjusting your search or browse all categories.</p>
+                    <a href="{% url 'shop:product_list' %}" class="btn btn-primary">View All Products</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header -->
+<header class="py-5" style="background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77); color: #fff;">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center">
+            <h1 class="display-4 fw-bolder">Sign Up</h1>
+            <p class="lead fw-normal text-light mb-0">Create your TechWave account today</p>
+        </div>
+    </div>
+</header>
+
+<!-- Register Section -->
+<section class="py-5" style="background: #f4f6f9;">
+    <div class="container d-flex justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg p-4" style="border-radius: 12px; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="color: #0d1b2a;">Join TechWave</h2>
+                    <p class="text-muted">Fill in your details to get started</p>
+                </div>
+                <form method="POST" action="{% url 'shop:register' %}">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password1 }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password2 }}
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn" style="background: linear-gradient(135deg, #415a77, #1b263b); color: #fff; border-radius: 8px; font-weight: bold; transition: 0.3s;">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center mt-4">
+                    <p class="text-muted">Already have an account? <a href="{% url 'shop:login' %}" style="color: #415a77; font-weight: 600;">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

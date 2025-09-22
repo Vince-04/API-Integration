@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4">Shopping Cart</h2>
+
+  {% if cart %}
+    <table class="table table-bordered text-center align-middle">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>₱{{ item.price }}</td>
+          <td>
+            <form method="post" action="{% url 'cart:cart_update' item.product.id %}" class="d-flex justify-content-center">
+              {% csrf_token %}
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control w-50 me-2 text-center">
+              <button type="submit" class="btn btn-sm btn-primary">Update</button>
+            </form>
+          </td>
+          <td>₱{{ item.total_price }}</td>
+          <td>
+            <a href="{% url 'cart:cart_delete' item.product.id %}" class="btn btn-sm btn-danger">Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-end mt-4">
+      <h4>Total: <strong>₱{{ cart.get_total_price }}</strong></h4>
+      <a href="{% url 'cart:cart_checkout' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
+      
+    </div>
+
+  {% else %}
+    <div class="alert alert-info">Your cart is empty.</div>
+  {% endif %}
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+{% endblock %}

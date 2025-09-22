@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Checkout</h2>
+
+    {% if cart %}
+        <table class="table table-bordered text-center align-middle">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>₱{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₱{{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4">
+            <h4>Total: <strong>₱{{ cart.get_total_price }}</strong></h4>
+            <a href="{% url 'shop:checkout' %}" class="btn btn-primary mt-3">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Your cart is empty.</div>
+    {% endif %}
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+{% endblock %}

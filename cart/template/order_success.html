@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Thank you - ShopLite{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+  <h2 class="fw-bold">Thank you!</h2>
+  <p>Your order <strong>#{{ order.id }}</strong> has been placed.</p>
+  <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+</div>
+{% endblock %}

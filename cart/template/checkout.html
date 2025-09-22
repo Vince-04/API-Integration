@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Checkout - ShopLite{% endblock %}
+{% block content %}
+<h3>Checkout</h3>
+<form method="post" class="row g-3">
+  {% csrf_token %}
+  <div class="col-md-6">
+    <label class="form-label">Full Name</label>{{ form.name }}
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Email</label>{{ form.email }}
+    <div class="form-text">Leave blank if logged in.</div>
+  </div>
+  <div class="col-12">
+    <label class="form-label">Address 1</label>{{ form.address1 }}
+  </div>
+  <div class="col-12">
+    <label class="form-label">Address 2</label>{{ form.address2 }}
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">City</label>{{ form.city }}
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Postal Code</label>{{ form.postal_code }}
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Country</label>{{ form.country }}
+  </div>
+  <div class="col-12 d-flex justify-content-end">
+    <button class="btn btn-primary">Place Order</button>
+  </div>
+</form>
+{% endblock %}

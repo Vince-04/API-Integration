@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }} - ShopLite{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    {% if product.image %}
+      <img src="{{ product.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.title }}">
+    {% else %}
+      <div class="bg-light border rounded d-flex align-items-center justify-content-center" style="height:360px;">No Image</div>
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    <h2 class="fw-bold">{{ product.title }}</h2>
+    <p class="text-muted">{{ product.category.name }}</p>
+    <p>{{ product.description|linebreaks }}</p>
+    <div class="h4">₱{{ product.price }}</div>
+    <p class="small text-muted">Stock: {{ product.inventory }}</p>
+    <form action="{% url 'cart_add' product.id %}" method="post" class="d-flex align-items-center gap-2">
+      {% csrf_token %}
+      <input type="number" name="quantity" value="1" min="1" max="10" class="form-control" style="width:100px">
+      <button class="btn btn-primary">Add to Cart</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

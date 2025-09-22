@@ -1,0 +1,90 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg sticky-top" style="background: linear-gradient(135deg, #0f172a, #1e293b, #2563eb);">
+    <div class="container px-4 px-lg-5">
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold text-white fs-3" href="{% url 'shop:home' %}">
+            <i class="bi bi-cpu-fill me-2"></i> TechWave
+        </a>
+
+        <!-- Toggler -->
+        <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-semibold px-3 py-2 rounded hover-nav {% if request.resolver_match.url_name == 'home' %}active-link{% endif %}"
+                       href="{% url 'shop:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-semibold px-3 py-2 rounded hover-nav {% if request.resolver_match.url_name == 'about' %}active-link{% endif %}"
+                       href="{% url 'shop:about' %}">About</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-semibold px-3 py-2 rounded hover-nav" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Shop
+                    </a>
+                    <ul class="dropdown-menu shadow-lg rounded-3 border-0">
+                        <li><a class="dropdown-item" href="{% url 'shop:product_list' %}">All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:product_list' %}?q=popular">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:product_list' %}?q=new">New Arrivals</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Cart -->
+            <form class="d-flex ms-3">
+                <a href="{% url 'cart:cart_summary' %}" class="btn btn-light fw-bold px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-cart-fill me-2"></i>
+                    Cart (<span id="cart_quantity">{{ cart|length }}</span>)
+                </a>
+            </form>
+
+            <!-- Login/Logout -->
+            {% if user.is_authenticated %}
+            <a class="btn btn-outline-light ms-3 px-4 py-2 rounded-pill fw-semibold" href="{% url 'shop:logout' %}">Logout</a>
+            {% else %}
+            <a class="btn btn-outline-light ms-3 px-4 py-2 rounded-pill fw-semibold" href="{% url 'shop:login' %}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+
+<!-- Custom CSS -->
+<style>
+    .hover-nav {
+        transition: all 0.3s ease;
+    }
+
+    .hover-nav:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .active-link {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .navbar .dropdown-menu .dropdown-item:hover {
+        background-color: #1e293b;
+        color: #38bdf8; /* Neon blue hover */
+    }
+
+    .navbar-toggler {
+        filter: invert(1);
+    }
+
+    .btn-outline-light:hover {
+        background-color: #38bdf8;
+        color: #0f172a;
+        border-color: #38bdf8;
+    }
+</style>
