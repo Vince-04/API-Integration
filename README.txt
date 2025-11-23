@@ -8,6 +8,14 @@ Running the API in Docker locally
    docker run -d -p 5000:5000 --name shoplite-api-container shoplite-api
 4. Access the API at http://localhost:5000/
 
+Using Docker Compose
+1. Build and start the container with Docker Compose:
+   docker compose up --build
+2. Run the container in detached mode:
+   docker compose up --build -d
+3. Stop running containers:
+   docker compose down
+   
 GitHub CI/CD Workflow
 - The GitHub Actions workflow is located at `.github/workflows/ci-cd.yml`.
 - This workflow runs on push or PR to the 'main' branch.
@@ -37,5 +45,3 @@ Viewing CI/CD Workflow on GitHub
 Screenshots
 - Take a screenshot of the API running in Docker (e.g., curl or browser hitting localhost:5000).
 - Take a screenshot of GitHub Actions workflow showing a successful run.
-
-
